@@ -17,17 +17,18 @@ inputDocuments:
   - '_bmad-output/planning-artifacts/product-brief-teachmesensei-2026-02-05.md'
   - '_bmad-output/planning-artifacts/research/market-online-tutoring-mentorship-research-2026-02-05.md'
   - '_bmad-output/analysis/brainstorming-session-2026-02-05.md'
+  - '_bmad-output/analysis/brainstorming-session-2026-02-06.md'
 documentCounts:
   briefs: 1
   research: 1
-  brainstorming: 1
+  brainstorming: 2
   projectDocs: 0
 classification:
   projectType: web_app
   domain: edtech
   complexity: medium
   projectContext: greenfield
-  launchFocus: consumer-first
+  launchFocus: consumer-first-b2b-ready
 workflowType: 'prd'
 date: 2026-02-06
 author: Ducdo
@@ -49,12 +50,15 @@ TeachMeSensei is a mentorship community — not a tutoring marketplace — where
 
 **The solution:** A platform that meets learners where they are emotionally, honors mentors as practitioners (not tutors), builds relationships naturally through a Discover → Follow → Partner gradient, and uses AI to make humans more valuable (free AI handles 60%+ of questions; humans handle career navigation, judgment, and emotional support).
 
+**B2B opportunity:** The same feature set — scheduling, video, AI session notes, signal-based trust — serves enterprise teams running internal mentorship. Companies already have informal mentoring happening in DMs, coffee chats, and 1:1s. TeachMeSensei doesn't create mentorship programs — it surfaces and enhances the mentorship that's already happening invisibly. The enterprise pitch: *"Your people are already mentoring. We make it visible, measurable, and 10x better."* B2C remains the primary launch focus; B2B is a secondary market served by the same product with the same codebase. One product, two entry points.
+
 **Key differentiators:**
 1. **Designed to Graduate** — The platform celebrates your departure. Anti-engagement as the most powerful trust-building and growth strategy.
 2. **Practitioner Supply Model** — Working professionals, not career tutors. 10x larger addressable mentor pool motivated by identity, community, and legacy.
 3. **Signal-Based Trust** — Behavioral signals (return rates, session extensions, referrals) replace star ratings. Ungameable, meaningful reputation.
+4. **One Product, Two Markets** — The same mentor tool that serves B2C career-switchers serves B2B enterprise teams. B2C graduates become enterprise champions, creating a flywheel no pure-play B2B competitor can replicate.
 
-**Target users:** Career-switching learners (25-40, post-bootcamp), practitioner Senseis (working professionals 2+ years in), lurkers (pre-commitment explorers).
+**Target users:** Career-switching learners (25-40, post-bootcamp), practitioner Senseis (working professionals 2+ years in), lurkers (pre-commitment explorers), team leads adopting for their teams (B2B bottom-up), L&D directors formalizing enterprise licenses (B2B top-down).
 
 **Technology:** SvelteKit + Supabase + Daily.co. Solo developer architecture optimized for shipping speed.
 
@@ -118,6 +122,23 @@ TeachMeSensei is a mentorship community — not a tutoring marketplace — where
 - Session extension rate: >20% (they wanted to keep talking)
 - Session-end sentiment: >80% positive (they left feeling better)
 
+### B2B Enterprise Success
+
+**Phase 1.5 (B2B Validation):**
+- 3 pilot companies using team plan with active mentorship pairs
+- Team lead sets up mentorship in under 60 seconds (one-link setup validated)
+- Pilot teams report "can't go back to Zoom" for internal mentoring
+
+**Phase 2 (B2B Growth):**
+- 10+ enterprise teams on team plan ($15/user/mo)
+- First self-serve team plan purchase (no sales touch)
+- Manager dashboard adopted — team leads check mentorship health weekly
+
+**Scale (B2B Expansion):**
+- Enterprise ARR from team and enterprise plans
+- Team-to-enterprise conversion rate: >20% (teams that expand to org-wide license)
+- B2C graduate-to-enterprise-champion pipeline producing leads organically
+
 ### Measurable Outcomes
 
 | Metric | Phase 1 Target | Phase 2 Target | Scale Target |
@@ -129,6 +150,8 @@ TeachMeSensei is a mentorship community — not a tutoring marketplace — where
 | AI resolution rate | — | >60% | >70% |
 | First graduation | — | 1 | 50+ |
 | Graduate-to-Sensei | — | — | >20% |
+| B2B pilot teams | — | 3 (Phase 1.5) | 10+ teams |
+| Team-to-enterprise conversion | — | — | >20% |
 
 ---
 
@@ -419,6 +442,78 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 
 ---
 
+### Journey 8: Tanya Sets Up Team Mentorship (Team Lead — Bottom-Up Adoption)
+
+**Opening Scene:**
+Tanya, 34, is an engineering manager at a Series B startup. Her 8-person team has 3 new hires who joined in the last 2 months. She's been pairing them with senior engineers informally — Slack DMs, ad-hoc Zoom calls, a shared Google Doc of "things to know." It works, but it's invisible. She has no idea if the mentoring is actually happening or if the new hires are struggling in silence.
+
+A colleague on another team mentions TeachMeSensei: "It's like infrastructure for the mentoring you're already doing. AI takes notes and everything."
+
+**Rising Action:**
+Tanya visits the site. She sees: *"Set up mentorship for your team in 60 seconds."*
+
+She taps "Create Team." The flow:
+1. Name the team ("Backend Engineering")
+2. Add her email (becomes team admin)
+3. Get a shareable invite link: `teachmesensei.com/team/backend-eng-7k2m`
+
+That's it. No HR portal. No procurement form. No 47-field configuration wizard.
+
+She drops the link in her team's Slack channel: "Hey team — I set up TeachMeSensei for our mentoring sessions. It records and generates AI notes so we don't lose what we discuss. Try it for your next 1:1 with your mentor."
+
+**Climax:**
+Within the first week, 5 of 8 team members have had at least one session through the platform. The AI session notes are the hook — mentors love not having to write follow-up emails, and mentees love having a searchable record of advice.
+
+Two weeks later, Tanya opens her manager dashboard. She sees:
+- **Active mentoring pairs:** 4 (out of 4 possible new-hire pairings)
+- **Sessions this week:** 6
+- **Average session length:** 22 minutes
+- **Team members with zero mentorship activity:** 1 (Raj — she makes a mental note to check in)
+
+She didn't have to build a mentorship program. She just made the one she already had visible.
+
+**Resolution:**
+At the next engineering all-hands, Tanya's team lead asks how she's ramping new hires so fast. She shows the dashboard. Two other managers ask for the link. Within a month, 3 teams are using TeachMeSensei. Nobody asked HR. Nobody signed a contract. The $15/user/mo is on Tanya's corporate card — well under the expense approval threshold.
+
+The product spread the way Slack did: one team at a time, because it solved a real problem for the person using it.
+
+---
+
+### Journey 9: David Sees the Data (L&D Director — Enterprise Formalization)
+
+**Opening Scene:**
+David, 42, is the Director of Learning & Development at a 400-person tech company. He's been asked by the VP of People to "figure out mentorship" for Q3. He's evaluating MentorcliQ and Together Platform — both require 6-12 week implementations, dedicated admin resources, and $40K+ annual contracts.
+
+Then he discovers something unexpected in his own company: 4 engineering teams are already using TeachMeSensei. Nobody told him. Nobody asked permission. It just spread.
+
+**Rising Action:**
+David creates an org-level admin account and connects the existing teams. The platform shows him something no vendor demo ever could — real data from his own company:
+
+**The Mentorship Heat Map:**
+- Backend Engineering: 🟢 Rich mentorship culture (4 active pairs, 22 sessions/month)
+- Frontend Engineering: 🟢 Active (3 pairs, 15 sessions/month)
+- Data Science: 🟡 Emerging (1 pair, 4 sessions/month)
+- DevOps: 🔴 Mentorship desert (0 sessions — zero internal mentoring happening)
+- Product: 🔴 Mentorship desert
+
+David stares at the heat map. DevOps has had 40% attrition this year. Product just lost two senior PMs. He'd assumed those were compensation issues. The heat map tells a different story: those teams have no mentorship culture. People feel disconnected.
+
+**Climax:**
+David doesn't need a sales pitch. He has proof from inside his own company. He shows the heat map to the VP of People: "We already have mentorship working in engineering. These are the gaps. I want to expand it company-wide."
+
+The VP looks at the DevOps attrition numbers next to the mentorship data and says: "Do it."
+
+David upgrades to an enterprise plan. The rollout isn't an "implementation" — it's extending what 4 teams already proved works. He adds Product and DevOps teams. He doesn't force enrollment — he shares the link and lets the culture spread.
+
+**Resolution:**
+Six months later, the mentorship heat map is mostly green. DevOps attrition dropped. David's quarterly L&D report includes mentorship metrics alongside training completion — but unlike training, the mentorship data comes from real conversations, not attendance sheets.
+
+At a leadership meeting, the CEO asks: "How did we build a mentorship program so fast?" David answers: "We didn't build it. We discovered it. Four teams were already mentoring. We just made it visible and gave the rest of the company the same tools."
+
+The CEO asks: "What are we paying for this?" David: "Less than one engineer's monthly salary for the entire company."
+
+---
+
 ### Journey Requirements Summary
 
 | Journey | Capabilities Revealed |
@@ -430,6 +525,8 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 | Maya Becomes Maya 2.0 | Graduate-to-Sensei pipeline prompt, question-matching notification, constellation growth, cross-generational tracking |
 | Marcus No-Shows | No-show detection flow, learner recovery options (reschedule/switch/refund), Sensei notification escalation, pattern detection, admin flag visibility |
 | Admin Alex | Dashboard (active pairs, session counts, flags), flag taxonomy (categories), trust boundaries (data access levels), Sensei health monitoring, direct learner/Sensei outreach |
+| Tanya Sets Up Team Mentorship | One-link team creation (60-second setup), shareable team invite link, manager dashboard (active pairs, session counts, activity gaps), team-level mentorship health view, self-serve team plan billing |
+| David Sees the Data | Org-level admin account, mentorship heat map (team-by-team activity visualization), enterprise aggregate reporting, enterprise plan upgrade, bottom-up discovery of existing usage |
 
 ---
 
@@ -473,7 +570,14 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 
 - **PCI DSS:** Handled via payment processor (Stripe). Platform never touches raw card data.
 - **Marketplace payouts:** Stripe Connect for Sensei payouts with KYC-lite requirements.
-- **Pricing tiers:** Micro-transactions ($5 Flash Help), subscriptions ($40/mo Follow), future Knowledge Passport ($29-49/mo).
+- **Pricing tiers:** Micro-transactions ($5 Flash Help), subscriptions ($40/mo Follow), future Knowledge Passport ($29-49/mo), team plan ($15/user/mo), enterprise plan (invoice-based, annual).
+
+### Enterprise Data & Multi-Tenancy
+
+- **Enterprise data isolation:** Org-level data boundaries ensure one company's mentorship data is never visible to another. Team-level boundaries within an org ensure managers see only their team's aggregate data, not other teams'.
+- **Multi-tenancy architecture:** Logical separation via Supabase RLS — same infrastructure, same database, isolated by organization and team. No separate instances needed. RLS policies enforce: team members see own sessions, team leads see team aggregates, org admins see org-wide aggregates.
+- **Enterprise SSO:** SAML/SSO integration deferred to Phase 4. Supabase Auth supports SAML out of the box when ready. Until then, email-based auth with org domain verification is sufficient for team plans.
+- **Data ownership:** Organizations own aggregate mentorship data (heat maps, team activity metrics, coaching pattern analysis). Individuals own their personal session data (notes, recordings, growth journal). If an employee leaves, their personal data follows them (portable across B2B and B2C contexts); aggregate contributions remain with the org in anonymized form.
 
 ---
 
@@ -486,14 +590,25 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 3. **AI-First Economics with Emotional Escalation** — Free AI resolves 60%+ of questions. Human mentorship reserved for career navigation, judgment calls, and emotional support. AI detects distress signals and imposter syndrome to route appropriately. Novel combination of AI triage with emotional intelligence.
 4. **Practitioner Supply Model** — Working professionals motivated by identity, community, and legacy rather than income. Unlocks 10x larger mentor pool than professional tutor platforms. Retention through constellation growth and producer credits, not payment.
 5. **Constellation as Emotional Switching Cost** — Visual galaxy of mentorship impact. Every person helped is a star. Leaving the platform means abandoning your visible legacy. Novel retention mechanic that deepens with time.
+6. **"Discover, Don't Build" Enterprise Positioning** — Competitors sell "build a mentorship program." TeachMeSensei sells "discover the one you already have." Radically lower activation energy. Companies already have informal mentoring in DMs and 1:1s — the platform surfaces it, makes it visible, and enhances it with AI. Category-defining positioning for the $850M-$1.7B enterprise mentorship market.
+7. **Bottom-Up Product-Led Growth** — Individual team leads adopt for their team with no HR approval, no procurement, no IT ticket. Usage spreads organically across departments until the company formalizes with an enterprise license. Every B2B mentorship competitor sells top-down to HR/L&D. Product-led growth in B2B mentorship doesn't exist yet.
 
 ### Market Context & Competitive Landscape
 
+**B2C Landscape:**
 - No existing mentorship platform combines community-driven discovery + practitioner supply + AI-first economics + signal-based trust.
 - Chegg's collapse ($12B → revenue -30%) validates that information-based EdTech is dead. Relationship-based platforms are the future.
 - MentorCruise (closest competitor) uses traditional star ratings, professional tutors, and high pricing ($50-400/mo). TeachMeSensei inverts every axis.
 - ADPList has volume (25K mentors) but no quality signals, no revenue model, and no relationship depth.
 - The "Designed to Graduate" philosophy has no EdTech precedent but strong validation from Hinge's success with the same contrarian positioning in dating.
+
+**B2B Landscape ($850M-$1.7B enterprise mentorship market):**
+- **MentorcliQ** — Enterprise mentorship software. Top-down HR sale, 6-12 week implementation, questionnaire-based matching, session tracking via forms. Built for the HR admin who buys it, not the humans who use it.
+- **Together Platform** — Similar to MentorcliQ. Matching algorithms, program management, reporting dashboards. Requires dedicated program admin.
+- **Chronus** — Legacy enterprise mentoring. Heavy configuration, long implementation cycles, rigid program structures with enrollment and end dates.
+- **Mentorloop** — Lighter-weight B2B mentorship. Better UX than Chronus but still top-down, program-centric, HR-owned.
+- **All competitors share the same DNA:** Top-down sales to HR/L&D, formal program structures, questionnaire-based matching, session-count metrics, dedicated admin requirements, 6-12 week implementations. TeachMeSensei inverts every axis: bottom-up adoption, no formal program required, behavioral discovery instead of questionnaire matching, outcome metrics instead of activity metrics, self-managing via AI, 60-second setup.
+- **The real competitor is inaction:** 85% of companies have no formal mentorship tool. They use Zoom + Google Docs + good intentions. TeachMeSensei competes with doing nothing by making existing informal mentorship visible and better.
 
 ### Validation Approach
 
@@ -504,6 +619,9 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 | AI-first economics | Measure AI resolution rate and conversion from AI to human escalation | Phase 2 | >60% AI resolution, >40% escalation-to-Follow conversion |
 | Practitioner supply | Track Sensei session consistency and churn through invite-only tool phase | Phase 1 | >80% Senseis active monthly, >50% learners book second session |
 | Constellation retention | Measure engagement with constellation feature and correlation with Sensei retention | Phase 2 | Senseis who view constellation weekly retain at higher rate |
+| B2B bottom-up adoption | Track whether team leads adopt without HR involvement and whether usage spreads to adjacent teams | Phase 1.5 | 3 pilot teams active, at least 1 company with 2+ teams adopted organically |
+| "Discover, Don't Build" positioning | Validate that framing resonates with team leads and L&D buyers vs. "build a mentorship program" messaging | Phase 1.5 | Pilot team leads cite "making existing mentoring visible" as primary value in feedback |
+| Team-to-enterprise conversion | Track whether multi-team adoption leads to enterprise license conversations | Phase 2+ | >20% of companies with 3+ teams convert to enterprise plan |
 
 ### Risk Mitigation
 
@@ -514,6 +632,9 @@ At scale, this becomes a Trust & Safety role. For now, it's 15 minutes of Alex's
 | AI resolution rate too low | Invest in domain-specific fine-tuning, expand knowledge base, lower escalation threshold | AI resolution <40% |
 | Graduation philosophy confuses users | A/B test messaging — "designed to graduate" vs standard engagement framing | Qualitative signal: users express confusion about platform purpose |
 | Constellation doesn't drive retention | Simplify to basic impact stats if visual doesn't resonate | No measurable retention lift after 60 days |
+| B2B bottom-up adoption doesn't spread | Add lightweight "invite another team" prompt when team reaches 5+ sessions. If organic spread fails, test direct outreach to adjacent team leads using pilot team's data as social proof. | <3 teams after 8 weeks of pilot |
+| Enterprise data isolation concerns block adoption | Emphasize Supabase RLS architecture and provide clear data isolation documentation. Offer dedicated instance option at enterprise tier if required. | Pilot companies cite data privacy as blocker |
+| Team plan pricing doesn't convert | Test $10/user/mo price point. If self-serve fails, offer first-month-free pilot with measurement guarantee. | <5 paid team plans after 3 months |
 
 ---
 
@@ -621,24 +742,32 @@ SvelteKit SPA with SSR for public content. Two-layer architecture:
 
 **Success Gate:** >50% of learners book second session within 14 days. Senseis report "I can't go back to Zoom."
 
-### Phase 1.5: Open Invite Validation (Weeks 4-5)
+### Phase 1.5: Open Invite + B2B Validation (Weeks 4-6)
 
-**Goal:** Validate stranger-trust before building matching infrastructure
+**Goal:** Validate stranger-trust AND validate B2B team adoption before building matching infrastructure
 
-**What changes:**
+**What changes (B2C — unchanged):**
 - Senseis share invite codes publicly — LinkedIn posts, bootcamp Slack channels, meetup announcements
 - Still invite-only (supply-controlled), but learners no longer have prior relationships with Senseis
 - Track: do strangers book? Do they return? Does the tool work without existing trust?
 
-**Why this matters:** Phase 2 assumes strangers will match and trust each other through the platform. Phase 1.5 tests that assumption cheaply before building Flash Help, matching algorithms, and payment infrastructure.
+**What changes (B2B — new):**
+- Recruit 3 pilot companies/teams to use TeachMeSensei for internal mentorship
+- Team lead creates team via one-link setup (60-second flow)
+- Track team adoption: do team members use it? Do sessions happen? Do AI notes become indispensable?
+- Basic manager view: who's mentoring, who isn't, session counts per pair
 
-**Success Gate:** Strangers book and return at comparable rates to existing pairs. If not, investigate trust gaps before Phase 2.
+**Why this matters:** Phase 2 assumes strangers will match and trust each other (B2C) and that teams will self-serve adopt (B2B). Phase 1.5 tests both assumptions cheaply.
 
-### Phase 2: Flash Help (Weeks 5-8)
+**Success Gates:**
+- B2C: Strangers book and return at comparable rates to existing pairs. If not, investigate trust gaps before Phase 2.
+- B2B: 3 pilot teams active with >50% of team members having at least one session. Team leads report value from manager view.
 
-**Goal:** 50+ Flash Help sessions, prove unit economics
+### Phase 2: Flash Help + Team Plans (Weeks 7-12)
 
-**Capabilities:**
+**Goal:** 50+ Flash Help sessions, prove unit economics, 10+ teams on paid plans
+
+**Capabilities (B2C):**
 - Three entry points: "I'm stuck" / "I'm curious" / "I'm preparing"
 - AI-first triage layer (free, 24/7, resolves 60%+)
 - Human escalation with "2 Years Ahead" + style matching
@@ -651,13 +780,19 @@ SvelteKit SPA with SSR for public content. Two-layer architecture:
 - Async fallback modes: voice memo Flash Help, written Q&A with 24-hour turnaround
 - Google Calendar sync (deferred from Phase 1)
 
+**Capabilities (B2B — new):**
+- Team plan self-serve pricing ($15/user/mo) — any manager can expense on corporate card
+- Manager dashboard: team mentorship activity, session counts, active pairs, activity gaps
+- Team-level mentorship health view: who's mentoring, who isn't, session frequency
+- Team billing via Stripe (per-seat, self-serve)
+
 **Success Gates:**
-- >60% AI resolution rate
-- >40% of human escalations lead to repeat booking
-- At least 1 learner lands a job (first graduation)
+- B2C: >60% AI resolution rate, >40% of human escalations lead to repeat booking, at least 1 learner lands a job (first graduation)
+- B2B: 10+ teams on paid team plans, first self-serve team plan purchase with no sales touch
 
-### Phase 3: Growth (Months 3-6)
+### Phase 3: Growth + Enterprise Tier (Months 4-6)
 
+**B2C:**
 - Curiosity feed and Hot Takes (content as organic discovery)
 - Follow mode — deeper engagement beyond Flash Help ($40/mo recurring)
 - Knowledge Passport subscription ($29-49/mo)
@@ -665,14 +800,30 @@ SvelteKit SPA with SSR for public content. Two-layer architecture:
 - Graduate-to-Sensei pipeline prompt
 - Session-end sentiment capture
 
-### Phase 4: Vision (Months 6-12+)
+**B2B:**
+- Enterprise tier pricing (invoice-based, annual contract)
+- Org-level admin role with aggregate data access
+- Mentorship heat map v1 (team-by-team visualization of mentorship activity and gaps)
+- Enterprise aggregate reporting (org-wide metrics, team comparisons)
+- Cross-company mentorship network opt-in (for teams/orgs that want access to the broader B2C Sensei pool)
 
+### Phase 4: Vision + Enterprise Intelligence (Months 6-12+)
+
+**B2C:**
 - Guilds (purpose-based communities)
 - Learning Parties, Quests, Knowledge Jams
 - Employer Quests (B2B hiring pipeline)
 - Bootcamp partnerships (post-graduation layer)
 - Sensei Economy (micro-communities, own pricing)
 - TeachMeSensei API (mentorship as infrastructure)
+
+**B2B (Enterprise Intelligence):**
+- Retention signal surfacing (mentorship disengagement as early warning for attrition)
+- DEI measurement (mentorship access equity across demographics)
+- Culture diagnostic (mentorship density as team health indicator)
+- AI coaching pattern analysis for mentors (coaching mirror — feedback on facilitation style)
+- Enterprise SSO (SAML via Supabase Auth)
+- Mentee progress reports (auto-generated, shareable with manager)
 
 ### Risk Mitigation Strategy
 
@@ -805,6 +956,29 @@ SvelteKit SPA with SSR for public content. Two-layer architecture:
 - **FR60:** The other participant is notified when deletion is requested
 - **FR61:** Users can export their personal data (GDPR data portability)
 
+### Team & Enterprise Management (Phase 1.5-3)
+
+- **FR62:** Team leads can create a team via a one-link setup flow in under 60 seconds (Phase 1.5)
+- **FR63:** Team leads can generate a shareable team invite link for members to join (Phase 1.5)
+- **FR64:** Team members can join a team by clicking the invite link (Phase 1.5)
+- **FR65:** Team leads can view a manager dashboard showing team mentorship activity: active pairs, session counts, average session length, and members with zero activity (Phase 1.5)
+- **FR66:** Team leads can view a team-level mentorship health view identifying who is mentoring, who isn't, and session frequency per pair (Phase 2)
+- **FR67:** The system supports self-serve team plan billing at $15/user/mo via Stripe (Phase 2)
+- **FR68:** The system enforces team-level data boundaries — team leads see only their own team's aggregate data (Phase 1.5)
+- **FR69:** Org-level admins can connect multiple teams into an organization and view aggregate data across teams (Phase 3)
+- **FR70:** Org-level admins can view the mentorship heat map — a team-by-team visualization of mentorship activity and gaps (Phase 3)
+- **FR71:** Org-level admins can view enterprise aggregate reporting: org-wide session metrics, team comparisons, mentorship density by team (Phase 3)
+- **FR72:** The system supports enterprise plan billing (invoice-based, annual contract) (Phase 3)
+- **FR73:** Teams and orgs can opt into the cross-company mentorship network to access the broader Sensei pool (Phase 3)
+- **FR74:** The system enforces org-level data isolation — one organization's mentorship data is never visible to another organization (Phase 1.5)
+
+### Enterprise Intelligence (Phase 3-4)
+
+- **FR75:** The system generates a mentorship heat map visualization at the team and org level, showing where mentorship is thriving and where gaps exist (Phase 3)
+- **FR76:** The system provides AI coaching pattern analysis for mentors — post-session feedback on facilitation style, question-to-directive ratio, and coaching effectiveness (Phase 4)
+- **FR77:** The system auto-generates mentee progress reports summarizing skills developed, sessions completed, and growth trajectory, shareable with the mentee's manager (Phase 4)
+- **FR78:** The system surfaces retention signals by detecting mentorship disengagement patterns as an early warning for potential attrition (Phase 4)
+
 ---
 
 ## Non-Functional Requirements
@@ -831,11 +1005,20 @@ SvelteKit SPA with SSR for public content. Two-layer architecture:
 - PCI DSS compliance via Stripe (platform never handles raw card data)
 - Two-party consent required for session recording
 - Age verification (18+) enforced at registration
+- Enterprise SSO/SAML: deferred to Phase 4. Supabase Auth supports SAML natively. Until then, org domain verification via email provides sufficient team/enterprise authentication.
+
+### Multi-Tenancy
+
+- Org-level data isolation enforced via Supabase RLS — no cross-organization data leakage
+- Team-level data boundaries within organizations — team leads see only their team's aggregate metrics
+- Same database infrastructure for B2C and B2B users — logical separation, not physical separation
+- RLS policies validated for: team member → own sessions, team lead → team aggregates, org admin → org-wide aggregates, platform admin → cross-org platform metrics
 
 ### Scalability
 
 - Phase 1: Support 10 concurrent Sensei-learner pairs (20 active users)
-- Phase 2: Support 50+ Flash Help sessions, 100 active users
+- Phase 2: Support 50+ Flash Help sessions, 100 active users, 50-person teams
+- Phase 4: Support 500-person organizations with multiple teams
 - Architecture must not preclude 10x growth without re-architecture (Supabase + SvelteKit support this natively)
 - Video infrastructure scales independently via Daily.co's managed service
 
