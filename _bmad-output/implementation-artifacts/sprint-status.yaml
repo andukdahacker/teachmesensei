@@ -1,0 +1,177 @@
+# generated: 2026-02-07
+# project: tutorme
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-02-07
+project: tutorme
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # ============================================
+  # Epic 1: Project Foundation & Production Deploy (Phase 1)
+  # ============================================
+  epic-1: backlog
+  1-1-repository-setup-and-sveltekit-scaffold: backlog
+  1-2-route-group-layouts-and-component-library-shell: backlog
+  1-3-production-deployment-and-health-check: backlog
+  1-4-ci-cd-pipeline-and-test-infrastructure: backlog
+  epic-1-retrospective: optional
+
+  # ============================================
+  # Epic 2: Identity, Auth & User Profiles (Phase 1)
+  # ============================================
+  epic-2: backlog
+  2-1-supabase-auth-integration-and-route-guards: backlog
+  2-2-user-registration-and-login: backlog
+  2-3-age-verification-and-onboarding-flow: backlog
+  2-4-profile-management: backlog
+  2-5-database-schema-rls-and-role-based-access: backlog
+  epic-2-retrospective: optional
+
+  # ============================================
+  # Epic 3: Sensei Invite System & Learner Connections (Phase 1)
+  # ============================================
+  epic-3: backlog
+  3-1-invite-code-generation-and-management: backlog
+  3-2-learner-claims-invite-code: backlog
+  3-3-sensei-learner-list: backlog
+  3-4-learner-connection-and-session-history-view: backlog
+  epic-3-retrospective: optional
+
+  # ============================================
+  # Epic 4: Session Scheduling & Availability (Phase 1)
+  # ============================================
+  epic-4: backlog
+  4-1-sensei-availability-management: backlog
+  4-2-learner-views-availability-and-books-session: backlog
+  4-3-session-email-confirmations: backlog
+  4-4-cancel-and-reschedule-session: backlog
+  4-5-session-reminders: backlog
+  epic-4-retrospective: optional
+
+  # ============================================
+  # Epic 5: Video Sessions & Recording Consent (Phase 1)
+  # ============================================
+  epic-5: backlog
+  5-1-daily-co-integration-and-video-room-creation: backlog
+  5-2-recording-consent-state-machine: backlog
+  5-3-recording-storage-and-encrypted-access: backlog
+  5-4-recording-retention-and-lifecycle-management: backlog
+  epic-5-retrospective: optional
+
+  # ============================================
+  # Epic 6: AI-Powered Session Notes & Admin Metrics (Phase 1)
+  # ============================================
+  epic-6: backlog
+  6-1-job-queue-infrastructure-and-ai-pipeline-skeleton: backlog
+  6-2-session-transcription: backlog
+  6-3-session-summary-generation-and-delivery: backlog
+  6-4-session-notes-review-and-pre-session-brief: backlog
+  6-5-sensei-annotations-and-copy-to-clipboard: backlog
+  6-6-admin-aggregate-platform-metrics: backlog
+  epic-6-retrospective: optional
+
+  # ============================================
+  # Epic 7: Team Creation, Data Privacy & Team Mentorship Health (Phase 1.5-2)
+  # ============================================
+  epic-7: backlog
+  7-1-data-deletion-request-and-notification: backlog
+  7-2-gdpr-data-export: backlog
+  7-3-team-creation-and-invite-link: backlog
+  7-4-team-member-joins-via-invite-link: backlog
+  7-5-manager-dashboard-team-mentorship-activity: backlog
+  7-6-team-mentorship-health-view: backlog
+  7-7-org-level-data-isolation: backlog
+  epic-7-retrospective: optional
+
+  # ============================================
+  # Epic 8: Flash Help, AI Triage & Matching (Phase 2)
+  # ============================================
+  epic-8: backlog
+  8-1-flash-help-entry-points-and-ai-conversation: backlog
+  8-2-emotional-distress-detection-and-escalation: backlog
+  8-3a-matching-algorithm-and-sensei-selection: backlog
+  8-3b-real-time-matching-ux-and-session-connection: backlog
+  8-4-sensei-presence-and-availability-tracking: backlog
+  8-5-warm-hold-and-graceful-degradation: backlog
+  8-6-async-fallback-modes: backlog
+  epic-8-retrospective: optional
+
+  # ============================================
+  # Epic 9: Payments & Monetization (Phase 2)
+  # ============================================
+  epic-9: backlog
+  9-1-polar-sh-integration-and-flash-help-micro-transactions: backlog
+  9-2-no-show-refunds: backlog
+  9-3-self-serve-team-plan-billing: backlog
+  epic-9-retrospective: optional
+
+  # ============================================
+  # Epic 10: Trust, Reputation & Safety (Phase 2)
+  # ============================================
+  epic-10: backlog
+  10-1-behavioral-signal-tracking: backlog
+  10-2-sensei-style-tags: backlog
+  10-3-enriched-sensei-profiles-with-trust-signals: backlog
+  10-4-session-flagging: backlog
+  10-5-no-show-detection-and-learner-recovery: backlog
+  10-6-admin-flag-management: backlog
+  epic-10-retrospective: optional
+
+  # ============================================
+  # Epic 11: Constellation, Graduation & Growth (Phase 2)
+  # ============================================
+  epic-11: backlog
+  11-1-constellation-data-model-and-visualization: backlog
+  11-2-graduation-milestone-tracking: backlog
+  11-3-graduate-to-sensei-pipeline: backlog
+  epic-11-retrospective: optional
+
+  # ============================================
+  # Epic 12: Enterprise Org Management & Reporting (Phase 3)
+  # ============================================
+  epic-12: backlog
+  12-1-organization-creation-and-team-connection: backlog
+  12-2-mentorship-heat-map: backlog
+  12-3-enterprise-aggregate-reporting: backlog
+  12-4-enterprise-plan-billing: backlog
+  12-5-cross-company-mentorship-network-opt-in: backlog
+  epic-12-retrospective: optional
+
+  # ============================================
+  # Epic 13: Enterprise Intelligence (Phase 4)
+  # NOTE: No stories defined yet - stories must be created before Phase 4 work begins
+  # ============================================
+  epic-13: backlog
+  epic-13-retrospective: optional
