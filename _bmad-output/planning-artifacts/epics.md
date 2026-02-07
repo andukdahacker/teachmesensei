@@ -1390,6 +1390,8 @@ So that enterprise trust requirements are met from day one (FR74).
 
 ---
 
+> **PREREQUISITE REMINDER:** Before starting Phase 2 epics (8-11), create UX specifications covering Flash Help matching flow, constellation visualization, warm-hold states, and enterprise dashboards. The PRD user journeys provide directional context but dedicated UX specs are needed to prevent inconsistent user experience and rework. (Flagged in Implementation Readiness Assessment 2026-02-07)
+
 ### Epic 8: Flash Help, AI Triage & Matching
 Learners initiate help via "I'm stuck" / "I'm curious" / "I'm preparing", receive instant AI responses, AI detects emotional distress and escalates to human Sensei matching, warm-hold UX when no Sensei available, async fallback modes.
 **FRs covered:** FR34, FR35, FR36, FR37, FR38, FR39, FR40, FR41
@@ -2107,3 +2109,10 @@ So that my team can benefit from external mentors beyond our company (FR73).
 AI coaching pattern analysis for mentors, auto-generated mentee progress reports, retention signal detection for attrition early warning.
 **FRs covered:** FR76, FR77, FR78
 **Phase:** 4
+
+> **ACTION REQUIRED:** This epic has NO stories defined. Before Phase 4 planning begins, create full stories with Given/When/Then acceptance criteria for:
+> - FR76: AI coaching pattern analysis for mentors (post-session facilitation feedback)
+> - FR77: Auto-generated mentee progress reports (skills, sessions, growth trajectory)
+> - FR78: Retention signal detection (mentorship disengagement as attrition early warning)
+>
+> Without stories, these three FRs have no implementable path. (Flagged in Implementation Readiness Assessment 2026-02-07)
