@@ -400,7 +400,7 @@ So that I can verify production infrastructure works before building features.
 **And** the health endpoint returns `{ status: 'degraded', error: '...' }` with 503 when Supabase is unreachable
 **And** the application deploys successfully to Railway (Singapore region)
 **And** the `/health` endpoint responds with 200 in production
-**And** environment variables (`PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`) are configured in Railway
+**And** environment variables (`PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`) are configured in Railway
 
 ### Story 1.4: CI/CD Pipeline & Test Infrastructure
 

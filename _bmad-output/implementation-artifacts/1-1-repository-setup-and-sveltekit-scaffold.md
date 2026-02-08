@@ -107,8 +107,8 @@ The `@supabase/ssr` v0.8.0+ uses a new `getAll()`/`setAll()` cookie API (replaci
 ```bash
 # Supabase
 PUBLIC_SUPABASE_URL=http://localhost:54321
-PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+SUPABASE_SECRET_KEY=your-secret-key
 
 # Polar.sh (Phase 2 — Epic 9)
 POLAR_ACCESS_TOKEN=your-polar-access-token

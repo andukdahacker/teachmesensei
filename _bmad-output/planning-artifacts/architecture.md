@@ -1206,8 +1206,8 @@ No contradictory decisions found.
 ```bash
 # Supabase
 PUBLIC_SUPABASE_URL=http://localhost:54321
-PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+SUPABASE_SECRET_KEY=your-secret-key
 
 # Polar.sh
 POLAR_ACCESS_TOKEN=your-polar-access-token
@@ -1241,13 +1241,13 @@ export default {
 
 ```typescript
 import { createBrowserClient, isBrowser, parse } from '@supabase/ssr'
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
+import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY } from '$env/static/public'
 import type { LayoutLoad } from './$types'
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
   depends('supabase:auth')
 
-  const supabase = createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+  const supabase = createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_PUBLISHABLE_KEY, {
     global: { fetch },
     cookies: { get(key) { if (!isBrowser()) return JSON.stringify(data.session); return parse(document.cookie)[key] } }
   })

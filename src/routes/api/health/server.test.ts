@@ -31,10 +31,7 @@ describe('GET /api/health', () => {
 	});
 
 	it('returns 200 with { status: "ok" } when Supabase is reachable', async () => {
-		global.fetch = vi.fn().mockResolvedValue({
-			ok: true,
-			status: 200
-		});
+		vi.spyOn(global, 'fetch').mockResolvedValue(new Response(null, { status: 200 }));
 
 		const response = await GET();
 		const body = await response.json();
@@ -50,7 +47,7 @@ describe('GET /api/health', () => {
 	});
 
 	it('returns 503 with { status: "degraded" } when Supabase is unreachable', async () => {
-		global.fetch = vi.fn().mockRejectedValue(new Error('fetch failed'));
+		vi.spyOn(global, 'fetch').mockRejectedValue(new Error('fetch failed'));
 
 		const response = await GET();
 		const body = await response.json();
@@ -61,10 +58,7 @@ describe('GET /api/health', () => {
 	});
 
 	it('returns 503 when Supabase returns non-ok status', async () => {
-		global.fetch = vi.fn().mockResolvedValue({
-			ok: false,
-			status: 500
-		});
+		vi.spyOn(global, 'fetch').mockResolvedValue(new Response(null, { status: 500 }));
 
 		const response = await GET();
 		const body = await response.json();
@@ -75,7 +69,9 @@ describe('GET /api/health', () => {
 	});
 
 	it('returns 503 when fetch times out', async () => {
-		global.fetch = vi.fn().mockRejectedValue(new DOMException('Signal timed out.', 'TimeoutError'));
+		vi.spyOn(global, 'fetch').mockRejectedValue(
+			new DOMException('Signal timed out.', 'TimeoutError')
+		);
 
 		const response = await GET();
 		const body = await response.json();

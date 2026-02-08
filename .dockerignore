@@ -19,4 +19,5 @@ tests
 .env.*
 !.env.example
 .vscode
+.claude
 .github
