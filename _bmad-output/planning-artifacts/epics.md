@@ -432,6 +432,26 @@ Users can register (Magic Link, Google, GitHub OAuth), log in, verify age (18+),
 
 Users can register (Magic Link, Google, GitHub OAuth), log in, verify age (18+), manage their profile, and experience role-based access. Senseis complete onboarding with topic expertise. Learners set topic interests.
 
+### Story 2.0: Provision Staging Environment
+
+As a developer,
+I want a staging environment on Railway with its own Supabase project,
+So that I can validate database migrations, RLS policies, and auth flows before deploying to production.
+
+**Acceptance Criteria:**
+
+**Given** the production Railway service from Epic 1
+**When** I provision a staging environment
+**Then** a separate Railway service exists with its own environment variables
+**And** a separate Supabase project provides an isolated staging database
+**And** the CI/CD pipeline (from Story 1.4) deploys to staging on push to a staging branch (or PR merge)
+**And** staging and production share zero data — fully isolated
+**And** the staging `/api/health` endpoint returns 200 with its own Supabase connection
+
+> **Decision Note:** Deferred from Epic 1 (agreed during PM chat on 2026-02-08). Staging adds no value until database schema and auth exist — Epic 2 is where deployment risk first appears.
+
+---
+
 ### Story 2.1: Supabase Auth Integration & Route Guards
 
 As a developer,
