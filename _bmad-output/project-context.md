@@ -108,7 +108,7 @@ New E2E test?       → tests/e2e/{feature}.spec.ts
 - **Always `auth.getUser()`** on server — never trust client session
 - Supabase browser client in `src/routes/+layout.ts`, server client in `hooks.server.ts` — verify pattern against current `@supabase/ssr` docs
 - `(public)`: no auth. `(app)`: auth required. `(admin)`: admin role. `(enterprise)`: org/team role
-- **NEVER** expose `SUPABASE_SERVICE_ROLE_KEY` to the client
+- **NEVER** expose `SUPABASE_SECRET_KEY` to the client
 
 ### Form & API Patterns
 
