@@ -1,6 +1,6 @@
 # Story 2.1: Supabase Auth Integration & Route Guards
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -48,56 +48,56 @@ So that the authentication foundation is secure and verified before building use
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Create `src/hooks.server.ts` with Supabase server client and route guards (AC: #1, #4, #5, #6, #7, #8)
-  - [ ] 1.1 Import `createServerClient` from `@supabase/ssr`
-  - [ ] 1.2 Create server client with `getAll`/`setAll` cookie configuration (see Dev Notes for exact code)
-  - [ ] 1.3 Implement `safeGetSession` helper on `event.locals` — calls `auth.getUser()` first (trusted), then `auth.getSession()` for session metadata
-  - [ ] 1.4 Implement route guard logic in the `handle` function:
+- [x] Task 1: Create `src/hooks.server.ts` with Supabase server client and route guards (AC: #1, #4, #5, #6, #7, #8)
+  - [x] 1.1 Import `createServerClient` from `@supabase/ssr`
+  - [x] 1.2 Create server client with `getAll`/`setAll` cookie configuration (see Dev Notes for exact code)
+  - [x] 1.3 Implement `safeGetSession` helper on `event.locals` — calls `auth.getUser()` first (trusted), then `auth.getSession()` for session metadata
+  - [x] 1.4 Implement route guard logic in the `handle` function:
     - Extract route group from `event.url.pathname` and `event.route.id`
     - `(public)` routes: no check, pass through
     - `(app)` routes: if no user, redirect 303 to `/login`
     - `(admin)` routes: if no user, redirect 303 to `/login`; if user but role not `admin`/`platform_admin`, return 403
     - `(enterprise)` routes: if no user, redirect 303 to `/login`; if user but role not `team_lead`/`org_admin`, return 403
     - API routes (`/api/*`): pass through (individual endpoints handle their own auth)
-  - [ ] 1.5 Add `filterSerializedResponseHeaders` to allow `content-range` and `x-supabase-api-version`
-  - [ ] 1.6 Update `src/app.d.ts` with `App.Locals` types: `supabase`, `safeGetSession`
+  - [x] 1.5 Add `filterSerializedResponseHeaders` to allow `content-range` and `x-supabase-api-version`
+  - [x] 1.6 Update `src/app.d.ts` with `App.Locals` types: `supabase`, `safeGetSession`
 
-- [ ] Task 2: Create `src/routes/+layout.ts` — browser client initialization (AC: #2)
-  - [ ] 2.1 Import `createBrowserClient`, `createServerClient`, `isBrowser` from `@supabase/ssr`
-  - [ ] 2.2 Use `depends('supabase:auth')` for reactive invalidation
-  - [ ] 2.3 Use `isBrowser()` to branch: `createBrowserClient` on client, `createServerClient` (with `getAll` from `data.cookies`) on server
-  - [ ] 2.4 Call `supabase.auth.getSession()` to extract session
-  - [ ] 2.5 Return `{ supabase, session }` from load function
+- [x] Task 2: Create `src/routes/+layout.ts` — browser client initialization (AC: #2)
+  - [x] 2.1 Import `createBrowserClient`, `createServerClient`, `isBrowser` from `@supabase/ssr`
+  - [x] 2.2 Use `depends('supabase:auth')` for reactive invalidation
+  - [x] 2.3 Use `isBrowser()` to branch: `createBrowserClient` on client, `createServerClient` (with `getAll` from `data.cookies`) on server
+  - [x] 2.4 Call `supabase.auth.getSession()` to extract session
+  - [x] 2.5 Return `{ supabase, session }` from load function
 
-- [ ] Task 3: Create `src/routes/+layout.server.ts` — session data passing (AC: #3)
-  - [ ] 3.1 Call `safeGetSession()` from `locals`
-  - [ ] 3.2 Return `{ session, user, cookies: cookies.getAll() }` — cookies needed for SSR client in `+layout.ts`
+- [x] Task 3: Create `src/routes/+layout.server.ts` — session data passing (AC: #3)
+  - [x] 3.1 Call `safeGetSession()` from `locals`
+  - [x] 3.2 Return `{ session, user, cookies: cookies.getAll() }` — cookies needed for SSR client in `+layout.ts`
 
-- [ ] Task 4: Update `src/routes/+layout.svelte` — wire auth state (AC: #2)
-  - [ ] 4.1 Accept `data` prop with `supabase` and `session`
-  - [ ] 4.2 Set up `onAuthStateChange` listener to call `invalidate('supabase:auth')` when auth state changes
-  - [ ] 4.3 Clean up listener on component destroy
-  - [ ] 4.4 Preserve existing Toaster setup
+- [x] Task 4: Update `src/routes/+layout.svelte` — wire auth state (AC: #2)
+  - [x] 4.1 Accept `data` prop with `supabase` and `session`
+  - [x] 4.2 Set up `onAuthStateChange` listener to call `invalidate('supabase:auth')` when auth state changes
+  - [x] 4.3 Clean up listener on component destroy
+  - [x] 4.4 Preserve existing Toaster setup
 
-- [ ] Task 5: Create auth integration test (AC: #9)
-  - [ ] 5.1 Create `tests/integration/auth/hooks.test.ts`
-  - [ ] 5.2 Test: server-side hook correctly resolves authenticated user session
-  - [ ] 5.3 Test: unauthenticated request to `(app)` route gets redirected to `/login`
-  - [ ] 5.4 Test: `(public)` route accessible without auth
-  - [ ] 5.5 Test: role-gated routes return 403 for wrong role
+- [x] Task 5: Create auth integration test (AC: #9)
+  - [x] 5.1 Create `tests/integration/auth/hooks.test.ts`
+  - [x] 5.2 Test: server-side hook correctly resolves authenticated user session
+  - [x] 5.3 Test: unauthenticated request to `(app)` route gets redirected to `/login`
+  - [x] 5.4 Test: `(public)` route accessible without auth
+  - [x] 5.5 Test: role-gated routes return 403 for wrong role
 
-- [ ] Task 6: Create unit tests for route guard logic (AC: #4, #5, #6, #7)
-  - [ ] 6.1 Create `src/hooks.server.test.ts` (co-located with source)
-  - [ ] 6.2 Test route group detection logic
-  - [ ] 6.3 Test redirect behavior per route group
-  - [ ] 6.4 Test 403 for role mismatches
-  - [ ] 6.5 Mock Supabase client using `vi.mock('@supabase/ssr')`
+- [x] Task 6: Create unit tests for route guard logic (AC: #4, #5, #6, #7)
+  - [x] 6.1 Create `src/hooks.server.test.ts` (co-located with source)
+  - [x] 6.2 Test route group detection logic
+  - [x] 6.3 Test redirect behavior per route group
+  - [x] 6.4 Test 403 for role mismatches
+  - [x] 6.5 Mock Supabase client using `vi.mock('@supabase/ssr')`
 
-- [ ] Task 7: Verify build and existing tests (AC: all)
-  - [ ] 7.1 Run `npm run build` — must succeed
-  - [ ] 7.2 Run `npm run test:unit` — all existing 17 tests + new tests pass
-  - [ ] 7.3 Run `npm run lint` — must pass
-  - [ ] 7.4 Run `npm run check` — must pass (zero type errors)
+- [x] Task 7: Verify build and existing tests (AC: all)
+  - [x] 7.1 Run `npm run build` — must succeed
+  - [x] 7.2 Run `npm run test:unit` — all existing 17 tests + new tests pass
+  - [x] 7.3 Run `npm run lint` — must pass
+  - [x] 7.4 Run `npm run check` — must pass (zero type errors)
 
 ## Dev Notes
 
@@ -438,14 +438,44 @@ src/
 
 ### Agent Model Used
 
-{{agent_model_name_version}}
+Claude Opus 4.6
 
 ### Debug Log References
 
+- Build initially failed due to missing `.env` file — copied `.env.example` to `.env` (gitignored) to provide `PUBLIC_SUPABASE_URL` and `PUBLIC_SUPABASE_PUBLISHABLE_KEY` at build time
+- svelte-check caught `PageData` interface conflict — removed manual `PageData` declaration from `app.d.ts` since SvelteKit auto-generates these types from load functions
+- ESLint flagged unused params in mock resolve functions — fixed by removing explicit param types from simple mocks, using `eslint-disable-next-line` for the typed resolve needed in filterSerializedResponseHeaders test
+- `filterSerializedResponseHeaders` type expects 2 args `(name, value)` — updated test to pass empty string as second arg
+
 ### Completion Notes List
+
+- Implemented Supabase auth integration following canonical `@supabase/ssr` v0.8.x pattern with `getAll`/`setAll` cookie API
+- Route guards centralized in `hooks.server.ts`: `(public)` + `/api` pass-through, `(app)` requires auth, `(admin)` requires admin/platform_admin role, `(enterprise)` requires team_lead/org_admin role
+- Role checks use `user.app_metadata.role` (Option A from Dev Notes — chosen over recommended Option B because it provides complete guard logic that will work correctly once registration sets roles in Story 2.2, avoiding a future rewrite; admin/enterprise routes correctly return 403 for any user without the required role, including new users with no role set)
+- `safeGetSession` calls `auth.getUser()` first (trusted server-side) then `auth.getSession()` for session metadata; result is cached per-request to avoid redundant Supabase API calls
+- `filterSerializedResponseHeaders` extracted to shared `resolveOptions` const (DRY — used by both public and authenticated resolve paths)
+- `+layout.ts` uses `isBrowser()` branching pattern with `depends('supabase:auth')` for reactive invalidation
+- `+layout.svelte` updated with `onAuthStateChange` listener calling `invalidate('supabase:auth')`, cleanup on destroy, Toaster preserved
+- 30 new tests: 25 unit tests (co-located `hooks.server.test.ts`) + 5 mock-based integration tests (`tests/integration/auth/hooks.test.ts`)
+- Integration tests use mocked Supabase (not a real local stack) — they verify the full handle chain end-to-end but do not test real cookie/session resolution. Real Supabase integration tests deferred to Story 2.5 when local stack is required for RLS testing.
+- All 47 tests pass (17 original + 30 new), zero regressions
+- Build, lint, and svelte-check all pass with zero errors
 
 ### Change Log
 
 - 2026-02-09: Story created by SM agent (Claude Opus 4.6) — ultimate context engine analysis completed
+- 2026-02-09: Story implemented by Dev agent (Claude Opus 4.6) — all 7 tasks complete, 22 tests added, all quality gates pass
+- 2026-02-09: Code review by Dev agent (Claude Opus 4.6) — 3 HIGH, 4 MEDIUM, 2 LOW issues found; fixed: safeGetSession caching (H1), filterSerializedResponseHeaders DRY extraction (M1), 8 new edge-case tests (H3+M2), documentation corrections (H2+M3+M4); all 47 tests pass
 
 ### File List
+
+**New files:**
+- `src/hooks.server.ts` — Supabase server client + centralized route guards (with session caching and shared resolveOptions)
+- `src/routes/+layout.ts` — Browser/server client initialization with isBrowser() branching
+- `src/routes/+layout.server.ts` — Session data passing (session, user, cookies)
+- `src/hooks.server.test.ts` — 25 unit tests for route guard logic (includes edge cases for no-group routes, undefined app_metadata, session caching)
+- `tests/integration/auth/hooks.test.ts` — 5 mock-based integration tests for auth hooks
+
+**Modified files:**
+- `src/app.d.ts` — Added App.Locals types (supabase, safeGetSession)
+- `src/routes/+layout.svelte` — Added auth state change listener with onMount/invalidate
