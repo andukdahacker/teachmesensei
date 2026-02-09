@@ -51,8 +51,9 @@ development_status:
   # ============================================
   # Epic 2: Identity, Auth & User Profiles (Phase 1)
   # ============================================
-  epic-2: backlog
-  2-1-supabase-auth-integration-and-route-guards: backlog
+  epic-2: in-progress
+  2-0-provision-staging-environment: in-progress
+  2-1-supabase-auth-integration-and-route-guards: ready-for-dev
   2-2-user-registration-and-login: backlog
   2-3-age-verification-and-onboarding-flow: backlog
   2-4-profile-management: backlog
