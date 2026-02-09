@@ -9,6 +9,10 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# $env/static/public vars must exist at build time for Vite to inline them
+ARG PUBLIC_SUPABASE_URL
+ARG PUBLIC_SUPABASE_PUBLISHABLE_KEY
+ARG PUBLIC_APP_URL
 RUN npm run build
 RUN npm prune --omit=dev
 
