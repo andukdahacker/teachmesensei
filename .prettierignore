@@ -7,3 +7,11 @@ yarn.lock
 build/
 .svelte-kit/
 dist/
+
+# BMAD framework and output artifacts
+_bmad/
+_bmad-output/
+
+# AI tooling config
+.claude/
+.opencode/
