@@ -60,6 +60,26 @@ export const handle: Handle = async ({ event, resolve }) => {
 		});
 	}
 
+	// Onboarding redirect — skip for onboarding route itself and API routes
+	if (routeId.startsWith('/(app)') && !routeId.startsWith('/(app)/onboarding')) {
+		const { data: profile, error: profileError } = await event.locals.supabase
+			.from('profiles')
+			.select('onboarding_complete')
+			.eq('id', user.id)
+			.single();
+
+		if (profileError) {
+			console.error('Onboarding check failed:', profileError.message);
+		}
+
+		if (!profile || !profile.onboarding_complete) {
+			return new Response(null, {
+				status: 303,
+				headers: { location: '/onboarding' }
+			});
+		}
+	}
+
 	// Admin routes — require admin or platform_admin role
 	if (routeId.startsWith('/(admin)')) {
 		const role = user.app_metadata?.role;

@@ -1,10 +1,20 @@
 <script lang="ts">
-	// Placeholder — Story 2.3 builds the full onboarding flow
+	import OnboardingSteps from '$lib/components/features/onboarding/OnboardingSteps.svelte';
+	import AgeVerificationStep from '$lib/components/features/onboarding/AgeVerificationStep.svelte';
+	import RoleSelectionStep from '$lib/components/features/onboarding/RoleSelectionStep.svelte';
+	import ProfileSetupStep from '$lib/components/features/onboarding/ProfileSetupStep.svelte';
+
+	let { data } = $props();
 </script>
 
-<div class="flex min-h-[80vh] items-center justify-center px-4">
-	<div class="text-center space-y-4">
-		<h1 class="text-2xl font-semibold">Welcome to TeachMeSensei</h1>
-		<p class="text-muted-foreground">Onboarding coming soon</p>
-	</div>
+<div class="mx-auto max-w-lg px-4 py-8">
+	<OnboardingSteps currentStep={data.currentStep} />
+
+	{#if data.currentStep === 1}
+		<AgeVerificationStep data={data.ageForm} />
+	{:else if data.currentStep === 2}
+		<RoleSelectionStep data={data.roleForm} />
+	{:else if data.currentStep === 3}
+		<ProfileSetupStep data={data.profileForm} role={data.profile?.role ?? 'learner'} />
+	{/if}
 </div>

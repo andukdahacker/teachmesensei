@@ -11,13 +11,21 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 const mockGetUser = vi.fn();
 const mockGetSession = vi.fn();
+const mockSingle = vi.fn();
 
 vi.mock('@supabase/ssr', () => ({
 	createServerClient: vi.fn(() => ({
 		auth: {
 			getUser: mockGetUser,
 			getSession: mockGetSession
-		}
+		},
+		from: vi.fn(() => ({
+			select: vi.fn(() => ({
+				eq: vi.fn(() => ({
+					single: mockSingle
+				}))
+			}))
+		}))
 	}))
 }));
 
@@ -63,6 +71,7 @@ describe('Auth hooks integration', () => {
 		vi.clearAllMocks();
 		mockGetUser.mockResolvedValue({ data: { user: null }, error: { message: 'No user' } });
 		mockGetSession.mockResolvedValue({ data: { session: null } });
+		mockSingle.mockResolvedValue({ data: { onboarding_complete: true }, error: null });
 	});
 
 	it('server-side hook correctly resolves authenticated user session', async () => {

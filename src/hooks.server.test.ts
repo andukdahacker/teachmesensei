@@ -4,13 +4,21 @@ import type { RequestEvent, ResolveOptions } from '@sveltejs/kit';
 // Mock @supabase/ssr
 const mockGetUser = vi.fn();
 const mockGetSession = vi.fn();
+const mockSingle = vi.fn();
 
 vi.mock('@supabase/ssr', () => ({
 	createServerClient: vi.fn(() => ({
 		auth: {
 			getUser: mockGetUser,
 			getSession: mockGetSession
-		}
+		},
+		from: vi.fn(() => ({
+			select: vi.fn(() => ({
+				eq: vi.fn(() => ({
+					single: mockSingle
+				}))
+			}))
+		}))
 	}))
 }));
 
@@ -56,6 +64,7 @@ describe('hooks.server.ts', () => {
 		vi.clearAllMocks();
 		mockGetUser.mockResolvedValue({ data: { user: null }, error: { message: 'No user' } });
 		mockGetSession.mockResolvedValue({ data: { session: null } });
+		mockSingle.mockResolvedValue({ data: { onboarding_complete: true }, error: null });
 	});
 
 	describe('Supabase client setup', () => {
@@ -475,6 +484,92 @@ describe('hooks.server.ts', () => {
 				true
 			);
 			expect(capturedOpts.filterSerializedResponseHeaders!('x-custom-header', '')).toBe(false);
+		});
+	});
+
+	describe('Onboarding redirect guard', () => {
+		it('redirects unonboarded user from (app) route to /onboarding', async () => {
+			const mockUser = { id: 'user-1', email: 'test@test.com' };
+			mockGetUser.mockResolvedValue({ data: { user: mockUser }, error: null });
+			mockGetSession.mockResolvedValue({
+				data: { session: { access_token: 'token', user: mockUser } }
+			});
+			mockSingle.mockResolvedValue({ data: { onboarding_complete: false }, error: null });
+
+			const event = createMockEvent({ route: { id: '/(app)/dashboard' } });
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(response.status).toBe(303);
+			expect(response.headers.get('location')).toBe('/onboarding');
+		});
+
+		it('redirects when profile is null (no profile row)', async () => {
+			const mockUser = { id: 'user-1', email: 'test@test.com' };
+			mockGetUser.mockResolvedValue({ data: { user: mockUser }, error: null });
+			mockGetSession.mockResolvedValue({
+				data: { session: { access_token: 'token', user: mockUser } }
+			});
+			mockSingle.mockResolvedValue({ data: null, error: null });
+
+			const event = createMockEvent({ route: { id: '/(app)/dashboard' } });
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(response.status).toBe(303);
+			expect(response.headers.get('location')).toBe('/onboarding');
+		});
+
+		it('allows onboarded user to access (app) routes', async () => {
+			const mockUser = { id: 'user-1', email: 'test@test.com' };
+			mockGetUser.mockResolvedValue({ data: { user: mockUser }, error: null });
+			mockGetSession.mockResolvedValue({
+				data: { session: { access_token: 'token', user: mockUser } }
+			});
+			mockSingle.mockResolvedValue({ data: { onboarding_complete: true }, error: null });
+
+			const event = createMockEvent({ route: { id: '/(app)/dashboard' } });
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(resolve).toHaveBeenCalled();
+			expect(response.status).toBe(200);
+		});
+
+		it('does NOT redirect when on onboarding route itself', async () => {
+			const mockUser = { id: 'user-1', email: 'test@test.com' };
+			mockGetUser.mockResolvedValue({ data: { user: mockUser }, error: null });
+			mockGetSession.mockResolvedValue({
+				data: { session: { access_token: 'token', user: mockUser } }
+			});
+			mockSingle.mockResolvedValue({ data: { onboarding_complete: false }, error: null });
+
+			const event = createMockEvent({ route: { id: '/(app)/onboarding' } });
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(resolve).toHaveBeenCalled();
+			expect(response.status).toBe(200);
+		});
+
+		it('does NOT check onboarding for non-(app) routes', async () => {
+			const mockUser = { id: 'user-1', email: 'test@test.com' };
+			mockGetUser.mockResolvedValue({ data: { user: mockUser }, error: null });
+			mockGetSession.mockResolvedValue({
+				data: { session: { access_token: 'token', user: mockUser } }
+			});
+
+			const event = createMockEvent({ route: { id: '/' } });
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(resolve).toHaveBeenCalled();
+			expect(response.status).toBe(200);
 		});
 	});
 });
