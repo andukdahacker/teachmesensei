@@ -90,14 +90,14 @@ describe('Auth hooks integration', () => {
 		expect(mockGetUser).toHaveBeenCalled();
 	});
 
-	it('unauthenticated request to (app) route gets redirected to /login', async () => {
+	it('unauthenticated request to (app) route gets redirected to /login with redirectTo', async () => {
 		const event = createMockEvent({ route: { id: '/(app)/dashboard' } });
 		const resolve = createMockResolve();
 
 		const response = await handle({ event, resolve });
 
 		expect(response.status).toBe(303);
-		expect(response.headers.get('location')).toBe('/login');
+		expect(response.headers.get('location')).toContain('/login?redirectTo=');
 		expect(resolve).not.toHaveBeenCalled();
 	});
 

@@ -53,9 +53,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// All other routes require authentication
 	if (!user) {
+		const redirectTo = encodeURIComponent(event.url.pathname + event.url.search);
 		return new Response(null, {
 			status: 303,
-			headers: { location: '/login' }
+			headers: { location: `/login?redirectTo=${redirectTo}` }
 		});
 	}
 

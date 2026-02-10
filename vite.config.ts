@@ -1,9 +1,46 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, type Plugin } from 'vitest/config';
+
+// Stub uninstalled optional peer deps of sveltekit-superforms.
+// The barrel import 'sveltekit-superforms/adapters' pulls in all adapter files,
+// but we only use zod4. This plugin provides empty stubs with syntheticNamedExports
+// so Rollup doesn't fail resolving named imports from uninstalled packages.
+const OPTIONAL_PEER_DEPS = new Set([
+	'valibot',
+	'@valibot/to-json-schema',
+	'arktype',
+	'@typeschema/class-validator',
+	'class-validator',
+	'effect',
+	'effect/ParseResult',
+	'joi',
+	'superstruct',
+	'typebox',
+	'yup',
+	'@vinejs/vine',
+	'@exodus/schemasafe'
+]);
+
+function stubOptionalDeps(): Plugin {
+	return {
+		name: 'stub-optional-deps',
+		enforce: 'pre',
+		resolveId(id) {
+			if (OPTIONAL_PEER_DEPS.has(id)) {
+				return { id: `\0stub:${id}`, syntheticNamedExports: true };
+			}
+		},
+		load(id) {
+			if (id.startsWith('\0stub:')) {
+				return 'export default {}';
+			}
+		}
+	};
+}
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit()],
+	plugins: [stubOptionalDeps(), tailwindcss(), sveltekit()],
 	test: {
 		projects: [
 			{

@@ -143,14 +143,33 @@ describe('hooks.server.ts', () => {
 	});
 
 	describe('Route guards — (app) routes', () => {
-		it('redirects unauthenticated users to /login', async () => {
-			const event = createMockEvent({ route: { id: '/(app)/dashboard' } });
+		it('redirects unauthenticated users to /login with redirectTo param', async () => {
+			const event = createMockEvent({
+				route: { id: '/(app)/dashboard' },
+				url: new URL('http://localhost:3000/dashboard')
+			});
 			const resolve = createMockResolve();
 
 			const response = await handle({ event, resolve });
 
 			expect(response.status).toBe(303);
-			expect(response.headers.get('location')).toBe('/login');
+			const location = response.headers.get('location')!;
+			expect(location).toContain('/login?redirectTo=');
+			expect(location).toContain(encodeURIComponent('/dashboard'));
+		});
+
+		it('preserves query string in redirectTo param', async () => {
+			const event = createMockEvent({
+				route: { id: '/(app)/dashboard' },
+				url: new URL('http://localhost:3000/dashboard?tab=profile')
+			});
+			const resolve = createMockResolve();
+
+			const response = await handle({ event, resolve });
+
+			expect(response.status).toBe(303);
+			const location = response.headers.get('location')!;
+			expect(location).toContain(encodeURIComponent('/dashboard?tab=profile'));
 		});
 
 		it('allows authenticated users', async () => {
@@ -171,14 +190,14 @@ describe('hooks.server.ts', () => {
 	});
 
 	describe('Route guards — (admin) routes', () => {
-		it('redirects unauthenticated users to /login', async () => {
+		it('redirects unauthenticated users to /login with redirectTo', async () => {
 			const event = createMockEvent({ route: { id: '/(admin)/admin' } });
 			const resolve = createMockResolve();
 
 			const response = await handle({ event, resolve });
 
 			expect(response.status).toBe(303);
-			expect(response.headers.get('location')).toBe('/login');
+			expect(response.headers.get('location')).toContain('/login?redirectTo=');
 		});
 
 		it('returns 403 for authenticated users without admin role', async () => {
@@ -238,14 +257,14 @@ describe('hooks.server.ts', () => {
 	});
 
 	describe('Route guards — (enterprise) routes', () => {
-		it('redirects unauthenticated users to /login', async () => {
+		it('redirects unauthenticated users to /login with redirectTo', async () => {
 			const event = createMockEvent({ route: { id: '/(enterprise)/enterprise' } });
 			const resolve = createMockResolve();
 
 			const response = await handle({ event, resolve });
 
 			expect(response.status).toBe(303);
-			expect(response.headers.get('location')).toBe('/login');
+			expect(response.headers.get('location')).toContain('/login?redirectTo=');
 		});
 
 		it('returns 403 for authenticated users without enterprise role', async () => {
@@ -305,14 +324,14 @@ describe('hooks.server.ts', () => {
 	});
 
 	describe('Route guards — no route group (fallback)', () => {
-		it('redirects unauthenticated users to /login when route has no group', async () => {
+		it('redirects unauthenticated users to /login with redirectTo when route has no group', async () => {
 			const event = createMockEvent({ route: { id: '/' } });
 			const resolve = createMockResolve();
 
 			const response = await handle({ event, resolve });
 
 			expect(response.status).toBe(303);
-			expect(response.headers.get('location')).toBe('/login');
+			expect(response.headers.get('location')).toContain('/login?redirectTo=');
 		});
 
 		it('redirects unauthenticated users when route.id is null', async () => {
@@ -322,7 +341,7 @@ describe('hooks.server.ts', () => {
 			const response = await handle({ event, resolve });
 
 			expect(response.status).toBe(303);
-			expect(response.headers.get('location')).toBe('/login');
+			expect(response.headers.get('location')).toContain('/login?redirectTo=');
 		});
 
 		it('allows authenticated users on routes with no group', async () => {
