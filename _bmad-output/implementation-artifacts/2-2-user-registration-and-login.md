@@ -64,8 +64,8 @@ So that I can access the platform with minimal friction.
   - [x] 3.4 Create `handle_new_user()` trigger function: on auth.users INSERT → insert profiles row with default role `learner`, `onboarding_complete = false`, extract `display_name` and `avatar_url` from `raw_user_meta_data`
   - [x] 3.5 Create trigger: `on_auth_user_created` AFTER INSERT on `auth.users`
   - [x] 3.6 Create basic RLS policies: users can SELECT and UPDATE their own profile row
-  - [ ] 3.7 Test migration locally: `supabase db reset` must succeed — DEFERRED (Supabase local not running)
-  - [ ] 3.8 Generate TypeScript types: `supabase gen types typescript --local > src/lib/database.types.ts` — DEFERRED (requires Supabase local running)
+  - [x] 3.7 Test migration locally: `supabase db reset` must succeed
+  - [x] 3.8 Generate TypeScript types: `supabase gen types typescript --local > src/lib/database.types.ts`
 
 - [x] Task 4: Create Zod auth schema (AC: #1)
   - [x] 4.1 Create `src/lib/schemas/auth.ts` with `magicLinkSchema = z.object({ email: z.email() })` (Zod v4 uses `z.email()` instead of deprecated `z.string().email()`)
@@ -102,7 +102,7 @@ So that I can access the platform with minimal friction.
   - [x] 9.5 Update `src/hooks.server.test.ts` — updated 5 tests for redirectTo query parameter in auth redirect
 
 - [x] Task 10: Verify build and existing tests (AC: all)
-  - [ ] 10.1 Run `supabase db reset` — DEFERRED (Supabase local not running)
+  - [x] 10.1 Run `supabase db reset` — succeeded
   - [x] 10.2 Run `npm run build` — succeeded (required custom Vite plugin for optional peer dep stubbing)
   - [x] 10.3 Run `npm run test` — all 73 tests pass (61 unit + 12 integration)
   - [x] 10.4 Run `npm run lint` — passed
