@@ -56,7 +56,7 @@ development_status:
   2-1-supabase-auth-integration-and-route-guards: done
   2-2-user-registration-and-login: done
   2-3-age-verification-and-onboarding-flow: done
-  2-4-profile-management: backlog
+  2-4-profile-management: done
   2-5-database-schema-rls-and-role-based-access: backlog
   epic-2-retrospective: optional
 
