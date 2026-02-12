@@ -37,7 +37,9 @@ export type Database = {
 					display_name: string | null;
 					id: string;
 					onboarding_complete: boolean;
+					org_id: string | null;
 					role: Database['public']['Enums']['user_role'];
+					team_id: string | null;
 					topics: string[] | null;
 					updated_at: string;
 				};
@@ -49,7 +51,9 @@ export type Database = {
 					display_name?: string | null;
 					id: string;
 					onboarding_complete?: boolean;
+					org_id?: string | null;
 					role?: Database['public']['Enums']['user_role'];
+					team_id?: string | null;
 					topics?: string[] | null;
 					updated_at?: string;
 				};
@@ -61,7 +65,9 @@ export type Database = {
 					display_name?: string | null;
 					id?: string;
 					onboarding_complete?: boolean;
+					org_id?: string | null;
 					role?: Database['public']['Enums']['user_role'];
+					team_id?: string | null;
 					topics?: string[] | null;
 					updated_at?: string;
 				};

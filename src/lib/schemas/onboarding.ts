@@ -43,10 +43,9 @@ export const profileSetupSchema = z.object({
 	avatar_url: z.url('Please enter a valid URL').optional().or(z.literal('')),
 	topics: z
 		.array(
-			z.string().refine(
-				(t) => (AVAILABLE_TOPICS as readonly string[]).includes(t),
-				{ message: 'Invalid topic selection' }
-			)
+			z.string().refine((t) => (AVAILABLE_TOPICS as readonly string[]).includes(t), {
+				message: 'Invalid topic selection'
+			})
 		)
 		.default([])
 });
