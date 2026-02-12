@@ -33,4 +33,26 @@ describe('Sidebar', () => {
 		const settingsLink = links.find((l: HTMLElement) => l.textContent?.includes('Settings'));
 		expect(settingsLink?.getAttribute('href')).toBe('/settings');
 	});
+
+	it('shows Invite Codes link for sensei role', () => {
+		render(Sidebar, { props: { userRole: 'sensei' } });
+		expect(screen.getByText('Invite Codes')).toBeDefined();
+		const links = screen.getAllByRole('link');
+		const inviteLink = links.find((l: HTMLElement) => l.textContent?.includes('Invite Codes'));
+		expect(inviteLink?.getAttribute('href')).toBe('/invite-codes');
+	});
+
+	it('does not show Invite Codes link when userRole is null', () => {
+		render(Sidebar);
+		const links = screen.getAllByRole('link');
+		const inviteLink = links.find((l: HTMLElement) => l.textContent?.includes('Invite Codes'));
+		expect(inviteLink).toBeUndefined();
+	});
+
+	it('does not show Invite Codes link for learner role', () => {
+		render(Sidebar, { props: { userRole: 'learner' } });
+		const links = screen.getAllByRole('link');
+		const inviteLink = links.find((l: HTMLElement) => l.textContent?.includes('Invite Codes'));
+		expect(inviteLink).toBeUndefined();
+	});
 });

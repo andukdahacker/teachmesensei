@@ -28,6 +28,57 @@ export type Database = {
 	};
 	public: {
 		Tables: {
+			invite_codes: {
+				Row: {
+					claimed_at: string | null;
+					claimed_by: string | null;
+					code: string;
+					created_at: string;
+					id: string;
+					sensei_id: string;
+					shareable_url: string;
+					status: Database['public']['Enums']['invite_status'];
+					updated_at: string;
+				};
+				Insert: {
+					claimed_at?: string | null;
+					claimed_by?: string | null;
+					code: string;
+					created_at?: string;
+					id?: string;
+					sensei_id: string;
+					shareable_url: string;
+					status?: Database['public']['Enums']['invite_status'];
+					updated_at?: string;
+				};
+				Update: {
+					claimed_at?: string | null;
+					claimed_by?: string | null;
+					code?: string;
+					created_at?: string;
+					id?: string;
+					sensei_id?: string;
+					shareable_url?: string;
+					status?: Database['public']['Enums']['invite_status'];
+					updated_at?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'invite_codes_claimed_by_fkey';
+						columns: ['claimed_by'];
+						isOneToOne: false;
+						referencedRelation: 'profiles';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'invite_codes_sensei_id_fkey';
+						columns: ['sensei_id'];
+						isOneToOne: false;
+						referencedRelation: 'profiles';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			profiles: {
 				Row: {
 					avatar_url: string | null;
@@ -78,9 +129,14 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Functions: {
-			[_ in never]: never;
+			generate_invite_code: { Args: never; Returns: string };
+			get_user_role: {
+				Args: never;
+				Returns: Database['public']['Enums']['user_role'];
+			};
 		};
 		Enums: {
+			invite_status: 'unused' | 'claimed';
 			user_role: 'learner' | 'sensei' | 'admin' | 'platform_admin' | 'team_lead' | 'org_admin';
 		};
 		CompositeTypes: {
@@ -210,6 +266,7 @@ export const Constants = {
 	},
 	public: {
 		Enums: {
+			invite_status: ['unused', 'claimed'],
 			user_role: ['learner', 'sensei', 'admin', 'platform_admin', 'team_lead', 'org_admin']
 		}
 	}

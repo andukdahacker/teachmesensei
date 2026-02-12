@@ -1,9 +1,9 @@
 <script lang="ts">
 	import AppShell from '$lib/components/layout/AppShell.svelte';
 
-	let { children } = $props();
+	let { data, children } = $props();
 </script>
 
-<AppShell>
+<AppShell userRole={data.userRole}>
 	{@render children()}
 </AppShell>

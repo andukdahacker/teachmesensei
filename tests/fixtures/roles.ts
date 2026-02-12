@@ -51,22 +51,34 @@ export async function createAuthenticatedClients(): Promise<
 		const password = 'TestPassword123!';
 
 		// Create user or retrieve existing one (idempotent for re-runs without db reset)
+		// Handles concurrent calls from parallel test files by retrying on transient DB errors
 		let userId: string;
-		const { data: userData, error } = await admin.auth.admin.createUser({
-			email,
-			password,
-			email_confirm: true
-		});
-		if (error && error.message.includes('already been registered')) {
-			const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
-			const existing = list.users.find((u) => u.email === email);
-			if (!existing) throw new Error(`User ${email} reported as existing but not found`);
-			userId = existing.id;
-		} else if (error) {
+		const MAX_CREATE_RETRIES = 3;
+		for (let attempt = 0; attempt < MAX_CREATE_RETRIES; attempt++) {
+			const { data: userData, error } = await admin.auth.admin.createUser({
+				email,
+				password,
+				email_confirm: true
+			});
+			if (!error) {
+				userId = userData.user.id;
+				break;
+			}
+			if (error.message.includes('already been registered')) {
+				const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
+				const existing = list.users.find((u) => u.email === email);
+				if (!existing) throw new Error(`User ${email} reported as existing but not found`);
+				userId = existing.id;
+				break;
+			}
+			if (error.message.includes('Database error') && attempt < MAX_CREATE_RETRIES - 1) {
+				// Transient DB error (e.g. concurrent user creation) — wait and retry
+				await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+				continue;
+			}
 			throw new Error(`Failed to create ${role} user: ${error.message}`);
-		} else {
-			userId = userData.user.id;
 		}
+		userId = userId!;
 
 		// Set profile role + complete onboarding (via admin client — bypasses RLS)
 		const { error: updateError } = await admin
