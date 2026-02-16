@@ -28,6 +28,54 @@ export type Database = {
 	};
 	public: {
 		Tables: {
+			connections: {
+				Row: {
+					connected_at: string;
+					created_at: string;
+					id: string;
+					last_interaction_at: string | null;
+					learner_id: string;
+					sensei_id: string;
+					status: Database['public']['Enums']['connection_status'];
+					updated_at: string;
+				};
+				Insert: {
+					connected_at?: string;
+					created_at?: string;
+					id?: string;
+					last_interaction_at?: string | null;
+					learner_id: string;
+					sensei_id: string;
+					status?: Database['public']['Enums']['connection_status'];
+					updated_at?: string;
+				};
+				Update: {
+					connected_at?: string;
+					created_at?: string;
+					id?: string;
+					last_interaction_at?: string | null;
+					learner_id?: string;
+					sensei_id?: string;
+					status?: Database['public']['Enums']['connection_status'];
+					updated_at?: string;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'connections_learner_id_fkey';
+						columns: ['learner_id'];
+						isOneToOne: false;
+						referencedRelation: 'profiles';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'connections_sensei_id_fkey';
+						columns: ['sensei_id'];
+						isOneToOne: false;
+						referencedRelation: 'profiles';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			invite_codes: {
 				Row: {
 					claimed_at: string | null;
@@ -129,13 +177,16 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Functions: {
+			claim_invite_code: { Args: { code_value: string }; Returns: Json };
 			generate_invite_code: { Args: never; Returns: string };
+			get_invite_details: { Args: { code_value: string }; Returns: Json };
 			get_user_role: {
 				Args: never;
 				Returns: Database['public']['Enums']['user_role'];
 			};
 		};
 		Enums: {
+			connection_status: 'active' | 'archived';
 			invite_status: 'unused' | 'claimed';
 			user_role: 'learner' | 'sensei' | 'admin' | 'platform_admin' | 'team_lead' | 'org_admin';
 		};
@@ -266,6 +317,7 @@ export const Constants = {
 	},
 	public: {
 		Enums: {
+			connection_status: ['active', 'archived'],
 			invite_status: ['unused', 'claimed'],
 			user_role: ['learner', 'sensei', 'admin', 'platform_admin', 'team_lead', 'org_admin']
 		}
